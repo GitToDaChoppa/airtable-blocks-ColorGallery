@@ -14,7 +14,7 @@ const theme = {
         size: '18px',
         height: '20px',
       },
-      colors: {accent: '#6CE00D', darko: '#E08D03', brand: '#E00D7C', secondary: '#D119E0'}
+      colors: {accent: '#6ce00d', darko: '#E08D03', secondary: '#E00D7C', brand: '#D119E0', dark: '#333333', light: '#F9F9F9'}
     },
   };
 
@@ -24,7 +24,7 @@ const theme = {
     direction="row"
     align="center"
     justify="between"
-    background="brand"
+    background="dark"
     pad={{ left: 'medium', right: 'small', vertical: 'small' }}
     elevation="medium"
     style={{ zIndex: '1' }}
@@ -33,7 +33,7 @@ const theme = {
   )
 function ColorGalleryBlock() {
     const base = useBase();
-    const table = base.getTableByName("Color Gallery");
+    const table = base.getTableByName("Colors");
     let records;
     records = useRecords(table);
 
@@ -41,16 +41,19 @@ function ColorGalleryBlock() {
     return (
     <Grommet theme={theme}>
     <Appbar>
-        <Heading color="white">Color Gallery</Heading> <Paint size="large" color="accent"/>
+        <Heading color="white">Color Gallery</Heading> <Paint size="large" color="white"/>
     </Appbar>
 
     <Row>
         {records.map(color =>
 
         <Column key={color.id} color={color}>
-            <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={color.name} elevation="medium">{color.name}</Box>
-            <Box pad="small" width="8rem" height="6rem" background="white" elevation="medium" round={{corner: 'bottom', size: '15px'}}>
-               <h5> {color.getCellValueAsString('Hex')} </h5>
+            <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={color.getCellValueAsString('Hex')} elevation="medium">{color.name}</Box>
+            <Box pad="small" width="8rem" height="6rem" background="light" elevation="medium" round={{corner: 'bottom', size: '15px'}}>
+                <h5 style={{margin: '2px'}}> {color.getCellValueAsString('Hex')} </h5>
+                <h5 style={{margin: '2px'}}> {color.getCellValueAsString('RGB')} </h5>
+                <h5 style={{margin: '2px'}}> {color.getCellValueAsString('HSV')} </h5>
+                <PaletteTag> {color.getCellValueAsString('Palette')} </PaletteTag>
             </Box>
         </Column>
 
@@ -60,6 +63,14 @@ function ColorGalleryBlock() {
     </Grommet>
     )
 }
+const PaletteTag = styled.span`
+margin: 2px 0 0 0;
+font-size: 12px;
+color: gray;
+border-radius: 20px;
+padding: 0 0 0 0;
+
+`;
 
 const Row = styled.div`
     display: flex;
