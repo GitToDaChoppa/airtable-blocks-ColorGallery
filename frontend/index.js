@@ -1,18 +1,16 @@
-import {initializeBlock} from '@airtable/blocks/ui';
+import {initializeBlock, useBase, useRecords} from '@airtable/blocks/ui';
 import React from 'react';
-import { Grommet, Heading, Box } from 'grommet';
+import { Grommet, Heading, Box, Grid } from 'grommet';
 import {Paint} from 'grommet-icons';
-import {base} from '@airtable/blocks';
+import styled from 'styled-components'
 
-const table = base.getTableByName("Color Gallery");
-const colorName = table.getFieldByName("Color Name");
-const hexValue = table.getFieldByName("Hex");
+
 
 
 const theme = {
     global: {
       font: {
-        family: 'Roboto', 
+        family: 'Roboto',
         size: '18px',
         height: '20px',
       },
@@ -34,6 +32,11 @@ const theme = {
      />
   )
 function ColorGalleryBlock() {
+    const base = useBase();
+    const table = base.getTableByName("Color Gallery");
+    let records;
+    records = useRecords(table);
+
 
     return (
     <Grommet theme={theme}>
@@ -41,18 +44,39 @@ function ColorGalleryBlock() {
         <Heading color="white">Color Gallery</Heading> <Paint size="large" color="accent"/>
     </Appbar>
 
-    <Box background="white" style={{marginTop: '14px'}}>
-    {[
-        {name: "accent","hex": "#6CE00D" }, {name: "secondary", "hex": "#E00D7C"}, {name: "darko", "hex": "#000"}, {name: "brand", "hex": "#000"}
-    ].map(color =>
-        <div key={color.name} >
-        <Box pad="small" width="50%" round={{corner: 'right' , size: '15px'}} background={color.name} >{color.name} {color.hex}</Box>
-        </div>
+    <Row>
+        {records.map(color =>
+
+        <Column key={color.id} color={color}>
+            <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={color.name} elevation="medium">{color.name}</Box>
+            <Box pad="small" width="8rem" height="6rem" background="white" elevation="medium" round={{corner: 'bottom', size: '15px'}}>
+               <h5> {color.getCellValueAsString('Hex')} </h5>
+            </Box>
+        </Column>
+
     )
     }
-    </Box>
+    </Row>
     </Grommet>
     )
 }
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+    flex-wrap: wrap;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 8px; 
+  text-align: center;
+`;
 
 initializeBlock(() => <ColorGalleryBlock />);
