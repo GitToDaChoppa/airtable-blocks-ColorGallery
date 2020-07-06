@@ -40,11 +40,14 @@ function ColorGalleryBlock() {
     <Appbar>
         <Heading color="white">Color Gallery</Heading> <Paint size="large" color="accent"/>
     </Appbar>
+
     <Box background="white" style={{marginTop: '14px'}}>
     {[
-        "accent", "secondary", "darko", "brand",
+        {name: "accent","hex": "#6CE00D" }, {name: "secondary", "hex": "#E00D7C"}, {name: "darko", "hex": "#000"}, {name: "brand", "hex": "#000"}
     ].map(color =>
-        <Box pad="small" width="50%" round={{corner: 'right' , size: '15px'}} key={{color}} background={{color}} >{color}</Box>
+        <div key={color.name} >
+        <Box pad="small" width="50%" round={{corner: 'right' , size: '15px'}} background={color.name} >{color.name} {color.hex}</Box>
+        </div>
     )
     }
     </Box>
