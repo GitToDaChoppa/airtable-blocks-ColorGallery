@@ -5,8 +5,6 @@ import {Paint} from 'grommet-icons';
 import styled from 'styled-components'
 
 
-
-
 const theme = {
     global: {
       font: {
@@ -18,18 +16,16 @@ const theme = {
     },
   };
 
-  const Appbar = (props) => (
-    <Box
-    tag="header"
-    direction="row"
-    align="center"
-    justify="between"
-    background="dark"
-    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    elevation="medium"
-    style={{ zIndex: '1' }}
-    {...props}
-     />
+  const SwatchCard = (props) => (
+      <Column color={props.color}>
+          <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={props.color.getCellValueAsString('Hex')} elevation="medium">{props.color.name}</Box>
+          <Box pad="small" width="8rem" height="6rem" background="light" elevation="medium" round={{corner: 'bottom', size: '15px'}}>
+              <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('Hex')} </h5>
+              <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('RGB')} </h5>
+              <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('HSV')} </h5>
+              <PaletteTag> {props.color.getCellValueAsString('Palette')} </PaletteTag>
+          </Box>
+      </Column>
   )
 function ColorGalleryBlock() {
     const base = useBase();
@@ -40,23 +36,9 @@ function ColorGalleryBlock() {
 
     return (
     <Grommet theme={theme}>
-    <Appbar>
-        <Heading color="white">Color Gallery</Heading> <Paint size="large" color="white"/>
-    </Appbar>
-
     <Row>
         {records.map(color =>
-
-        <Column key={color.id} color={color}>
-            <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={color.getCellValueAsString('Hex')} elevation="medium">{color.name}</Box>
-            <Box pad="small" width="8rem" height="6rem" background="light" elevation="medium" round={{corner: 'bottom', size: '15px'}}>
-                <h5 style={{margin: '2px'}}> {color.getCellValueAsString('Hex')} </h5>
-                <h5 style={{margin: '2px'}}> {color.getCellValueAsString('RGB')} </h5>
-                <h5 style={{margin: '2px'}}> {color.getCellValueAsString('HSV')} </h5>
-                <PaletteTag> {color.getCellValueAsString('Palette')} </PaletteTag>
-            </Box>
-        </Column>
-
+        <SwatchCard key={color.id} color={color} />
     )
     }
     </Row>
