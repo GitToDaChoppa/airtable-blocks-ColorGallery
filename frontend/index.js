@@ -1,8 +1,9 @@
 import {initializeBlock, useBase, useRecords} from '@airtable/blocks/ui';
 import React from 'react';
-import { Grommet, Heading, Box, Grid } from 'grommet';
+import { Grommet, Box } from 'grommet';
 import styled from 'styled-components'
-
+// import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { useState } from 'react';
 
 const theme = {
     global: {
@@ -14,13 +15,16 @@ const theme = {
     },
   };
 
+// const PaletteSection = (props) => (
+//
+// )
+
   const SwatchCard = (props) => (
       <Column color={props.color}>
           <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={props.color.getCellValueAsString('Hex')}>{props.color.name}</Box>
           <Box pad="small" width="8rem" height="6rem" background="light" elevation="medium" round={{corner: 'bottom', size: '15px'}}>
               <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('Hex')} </h5>
               <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('RGB')} </h5>
-              <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('HSV')} </h5>
               <PaletteTag> {props.color.getCellValueAsString('Palette')} </PaletteTag>
           </Box>
       </Column>
@@ -29,8 +33,7 @@ function ColorGalleryBlock() {
     const base = useBase();
     const table = base.getTableByName("Colors");
     let records;
-    records = useRecords(table);
-
+    records = useRecords(table, {sorts: [{field: 'Palette'}]});
 
     return (
     <Grommet theme={theme}>

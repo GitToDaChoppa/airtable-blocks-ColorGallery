@@ -8,7 +8,8 @@ It can be used in several ways, including keeping track of color palettes or dis
  
 
  To Do:
-- [x] Componentization 
+- [x] Componentization
+- [ ] Sorting (so that swatches are always grouped by palette)
 - [ ] Table Selection
 - [ ] Copy Button(s) for Color Values (or just click text to copy)
 - [ ] Palette Sorting (?)
