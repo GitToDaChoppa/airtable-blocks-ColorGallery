@@ -20,12 +20,14 @@ const theme = {
 // )
 
   const SwatchCard = (props) => (
-      <Column color={props.color}>
-          <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={props.color.getCellValueAsString('Hex')}>{props.color.name}</Box>
-          <Box pad="small" width="8rem" height="6rem" background="light" elevation="medium" round={{corner: 'bottom', size: '15px'}}>
-              <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('Hex')} </h5>
-              <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('RGB')} </h5>
-              <PaletteTag> {props.color.getCellValueAsString('Palette')} </PaletteTag>
+      <Column color={props.color} >
+          <Box elevation="medium" round={{size: '15px'}}>
+              <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={props.color.getCellValueAsString('Hex')}>{props.color.name}</Box>
+              <Box pad="small" width="8rem" height="6rem" background="light" round={{corner: 'bottom', size: '15px'}}>
+                  <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('Hex')} </h5>
+                  <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('RGB')} </h5>
+                  <PaletteTag> {props.color.getCellValueAsString('Palette')} </PaletteTag>
+              </Box>
           </Box>
       </Column>
   )

@@ -9,10 +9,11 @@ It can be used in several ways, including keeping track of color palettes or dis
 
  To Do:
 - [x] Componentization
-- [ ] Sorting (so that swatches are always grouped by palette)
+- [x] Sorting (so that swatches are always grouped by palette)
 - [ ] Table Selection
+- [ ] Add Notes as a Tooltip
 - [ ] Copy Button(s) for Color Values (or just click text to copy)
-- [ ] Palette Sorting (?)
+- [ ] Separated Palette Sections or Options for Sorting (?)
 - [ ] Color Conversions (Hex <-> RGB) (?)
 - [ ] Color Picker (?)
 
