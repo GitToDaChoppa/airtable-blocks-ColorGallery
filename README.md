@@ -10,10 +10,15 @@ It can be used in several ways, including keeping track of color palettes or dis
  To Do:
 - [x] Componentization
 - [x] Sorting (so that swatches are always grouped by palette)
-- [ ] Table Selection
-- [ ] Add Notes as a Tooltip
-- [ ] Copy Button(s) for Color Values (or just click text to copy)
-- [ ] Separated Palette Sections or Options for Sorting (?)
+- [x] Add Notes as a Tooltip
+- [ ] Settings
+    - [ ] Table Selection
+    - [ ] Field Selections
+    - [ ] Hide/Show RGB/HSL
+    - [ ] Notes On/Off
+    - [ ] Tooltip Opacity (?)
+- [ ] Click to Copy Color Values
+- [ ] Separated Palette Sections and/or Options for Sorting (?)
 - [ ] Color Conversions (Hex <-> RGB) (?)
 - [ ] Color Picker (?)
 

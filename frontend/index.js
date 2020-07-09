@@ -1,9 +1,9 @@
-import {initializeBlock, useBase, useRecords} from '@airtable/blocks/ui';
+import {initializeBlock, useBase, useRecords, Tooltip} from '@airtable/blocks/ui';
 import React from 'react';
 import { Grommet, Box } from 'grommet';
 import styled from 'styled-components'
 // import {CopyToClipboard} from 'react-copy-to-clipboard';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const theme = {
     global: {
@@ -21,14 +21,23 @@ const theme = {
 
   const SwatchCard = (props) => (
       <Column color={props.color} >
-          <Box elevation="medium" round={{size: '15px'}}>
-              <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={props.color.getCellValueAsString('Hex')}>{props.color.name}</Box>
-              <Box pad="small" width="8rem" height="6rem" background="light" round={{corner: 'bottom', size: '15px'}}>
-                  <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('Hex')} </h5>
-                  <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('RGB')} </h5>
-                  <PaletteTag> {props.color.getCellValueAsString('Palette')} </PaletteTag>
+              <Box elevation="medium" round={{size: '15px'}}>
+                  <Tooltip
+                      content={props.color.getCellValueAsString('Notes')}
+                      placementX={Tooltip.placements.CENTER}
+                      placementY={Tooltip.placements.TOP}
+                      shouldHideTooltipOnClick={true}
+                      disabled={false}
+                  >
+                  <Box pad="small" width="8rem" round={{corner: 'top' , size: '15px'}} background={props.color.getCellValueAsString('Hex')}>{props.color.name}</Box>
+                  </Tooltip>
+                  <Box pad="small" width="8rem" height="6rem" background="light" round={{corner: 'bottom', size: '15px'}}>
+                      <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('Hex')} </h5>
+                      <h5 style={{margin: '2px'}}> {props.color.getCellValueAsString('RGB')} </h5>
+                      <PaletteTag> {props.color.getCellValueAsString('Palette')} </PaletteTag>
+                  </Box>
               </Box>
-          </Box>
+
       </Column>
   )
 function ColorGalleryBlock() {
